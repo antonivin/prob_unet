@@ -13,6 +13,6 @@ class PriorNet(tf.keras.layers.Layer):
         self.mu = Dense(latent_dim, name = 'prior_mu')
         self.logvar = Dense(latent_dim, name='prior_logvar')
 
-        def call(self, x):
-            x = self.conv(x)
-            return self.mu(x), self.logvar(x)
+    def call(self, x):
+        x = self.conv(x)
+        return self.mu(x), self.logvar(x)
