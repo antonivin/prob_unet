@@ -5,7 +5,7 @@ from prob_unet.model import ProbabilisticUNet
 
 
 @tf.function
-def train_step(x, y):
+def train_step(model, x, y, optimizer):
     with tf.GradientTape() as tape:
         y_pred, mu_post, logvar_post, mu_prior, logvar_prior = model(x, y, training=True)
         loss, mse, kl = prob_unet_loss(y, y_pred, mu_post, logvar_post, mu_prior, logvar_prior)
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     im_height = 128
     batch_size = 128
     epochs = 500
-    path_train = '/home/maria/pycharm/train/'
+    path_train = '/ba-120/ablage/Anto/probabilistic_UNET/train/'
 
     data, labels = get_data(path_train, im_height, im_width, train=True)
 
