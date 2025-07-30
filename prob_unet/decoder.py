@@ -24,7 +24,8 @@ class decoder(tf.keras.layers.Layer):
         ])
 
     def call(self, x, skips, z):
-        z_proj = Dense(tf.reduce_prod(x.shape[1:]), activation='relu')(z)
+        dim = tf.shape(x)
+        z_proj = Dense(dim[1]*dim[2]*dim[3], activation='relu')(z)
         z_proj = tf.reshape(z_proj, tf.shape(x))
         x = tf.concat([x, z_proj], axis = -1)
         for up, skip in zip(self.upsample_blocks, reversed(skips)):
