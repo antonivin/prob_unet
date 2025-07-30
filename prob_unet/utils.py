@@ -54,5 +54,6 @@ def reparameterize(mu, logvar):
     return mu + tf.exp(0.5 * logvar) * eps
 
 def prob_unet_loss(y_true, y_pred, mu_q, logvar_q, mu_p, logvar_p):
-
     mse = tf.reduce_mean(tf.square(y_true - y_pred))
+    kl = 0.5 * tf.reduce_mean(logvar_p - logvar_q + (tf.exp(logvar_q)+ tf.square(mu_q - mu_p)) / tf.exp(logvar_p) - 1)
+    return mse + kl
