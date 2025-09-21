@@ -1,2 +1,2 @@
 # prob_unet
-prob_unet for physical simulation
+probabilistic U-Net for uncertainty quantification in physical simulation
